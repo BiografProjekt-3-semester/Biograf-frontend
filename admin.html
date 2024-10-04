@@ -25,6 +25,11 @@
                     Tilføj ny showtime
                 </a>
             </li>
+            <li>
+                <a href="#" id="btn-add-movie" data-bs-toggle="modal" data-bs-target="#addMovieModal">
+                    Tilføj ny film
+                </a>
+            </li>
             <li><a href="#">Hjem</a></li>
             <li><a href="#">Film</a></li>
             <li><a href="#">Billetter</a></li>
@@ -32,6 +37,49 @@
         </ul>
     </nav>
 </header>
+
+
+<div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addMovieModalLabel">Indtast Filmdetaljer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="add-movie-form">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Titel:</label>
+                        <input type="text" id="title" name="title" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="ageLimit" class="form-label">Aldersgrænse:</label>
+                        <input type="number" id="ageLimit" name="ageLimit" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Varighed i minutter:</label>
+                        <input type="number" id="duration" name="duration" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Beskrivelse:</label>
+                        <textarea id="description" name="description" class="form-control" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="picture" class="form-label">Billede (URL):</label>
+                        <input type="text" id="picture" name="picture" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Opret film</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- Modal  -->
 <div class="modal fade" id="addShowtimeModal" tabindex="-1" aria-labelledby="addShowtimeModalLabel" aria-hidden="true">

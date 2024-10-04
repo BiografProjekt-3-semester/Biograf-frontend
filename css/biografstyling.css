@@ -8,7 +8,6 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #121212;  /* Mørk baggrund */
-    color: #fff;
     line-height: 1.6;
 }
 
@@ -126,4 +125,5 @@ footer {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 }
+
 
