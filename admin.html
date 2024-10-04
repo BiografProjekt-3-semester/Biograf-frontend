@@ -11,50 +11,70 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/biografstyling.css">
 </head>
 <body>
 
-<!-- Button modal -->
-<button type="button" class="btn btn-primary" id="btn-add-movie" data-bs-toggle="modal" data-bs-target="#addMovieModal">
-    Tilføj ny film
-</button>
+<!-- Header med biografnavn og menu -->
+<header class="header">
+    <div class="logo">BioCinema</div>
+    <nav>
+        <ul>
+            <li>
+                <a href="#" id="btn-add-showtime" data-bs-toggle="modal" data-bs-target="#addShowtimeModal">
+                    Tilføj ny showtime
+                </a>
+            </li>
+            <li><a href="#">Hjem</a></li>
+            <li><a href="#">Film</a></li>
+            <li><a href="#">Billetter</a></li>
+            <li><a href="#">Om os</a></li>
+        </ul>
+    </nav>
+</header>
 
 <!-- Modal  -->
-<div class="modal fade" id="addMovieModal" tabindex="-1" aria-labelledby="addMovieModalLabel" aria-hidden="true">
+<div class="modal fade" id="addShowtimeModal" tabindex="-1" aria-labelledby="addShowtimeModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addMovieModalLabel">Indtast Filmdetaljer</h5>
+                <h5 class="modal-title" id="addShowtimeModalLabel">Indtast Showtime Detaljer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="add-movie-form">
+                <form id="add-showtime-form">
+
+                    <!-- Dropdown for at vælge en film -->
                     <div class="mb-3">
-                        <label for="title" class="form-label">Titel:</label>
-                        <input type="text" id="title" name="title" class="form-control" required>
+                        <label for="movieSelect" class="form-label">Vælg film:</label>
+                        <select id="movieSelect" class="form-select" required>
+                            <option value="" disabled selected>Vælg en film</option>
+                            <!-- Dynamisk indhold fra API -->
+                        </select>
+                    </div>
+
+                    <!-- Dato og tid -->
+                    <div class="mb-3">
+                        <label for="movieDate" class="form-label">Dato (YYYY-MM-DD):</label>
+                        <input type="date" id="movieDate" name="movieDate" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="ageLimit" class="form-label">Aldersgrænse:</label>
-                        <input type="number" id="ageLimit" name="ageLimit" class="form-control" required>
+                        <label for="startTime" class="form-label">Starttid (HH:MM):</label>
+                        <input type="time" id="startTime" name="startTime" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="duration" class="form-label">Varighed i minutter:</label>
-                        <input type="number" id="duration" name="duration" class="form-control" required>
+                        <label for="endTime" class="form-label">Sluttid (HH:MM):</label>
+                        <input type="time" id="endTime" name="endTime" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="description" class="form-label">Beskrivelse:</label>
-                        <textarea id="description" name="description" class="form-control" required></textarea>
+                        <label for="price" class="form-label">Pris (DKK):</label>
+                        <input type="number" id="price" name="price" class="form-control" step="0.01" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="picture" class="form-label">Billede (URL):</label>
-                        <input type="text" id="picture" name="picture" class="form-control" required>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Opret film</button>
+                    <button type="submit" class="btn btn-primary">Tilføj Showtime</button>
                 </form>
             </div>
         </div>
