@@ -1,7 +1,7 @@
 const container = document.getElementById('movie-container');
 
 // Fetch data from your backend API
-fetch('http://localhost:8080/movie/getAllMovies')  // Din backend-API //Din aasds
+fetch('http://localhost:8080/movie/getAllMovies')
     .then(response => response.json())
     .then(data => {
         // Hvis dit backend-API returnerer en liste af film
@@ -10,13 +10,13 @@ fetch('http://localhost:8080/movie/getAllMovies')  // Din backend-API //Din aasd
             movieDiv.classList.add('movie');
             movieDiv.dataset.id = movie.id; // Gem filmens ID i data-attribut
 
-
             const moviePoster = document.createElement('img');
             moviePoster.src = movie.picture; // movie.picture matcher din backend's 'picture' felt
             moviePoster.alt = movie.title;
 
-            moviePoster.addEventListener('click', function () {
-               showMovieDetails(movie);
+            moviePoster.addEventListener('click', function() {
+                console.log("Clicked movie id: ", movie.id);
+                showMovieDetails(movie);  // Kalder showMovieDetails med filmens data
             });
 
             const movieTitle = document.createElement('h3');
@@ -38,36 +38,43 @@ fetch('http://localhost:8080/movie/getAllMovies')  // Din backend-API //Din aasd
             movieDiv.appendChild(movieDuration);
             movieDiv.appendChild(movieAgeLimit);
 
-           /* movieDiv.addEventListener('click', () => {
-                window.location.href = `http://localhost:8080/movie/${movie.id}`; // Naviger til filmens side
-            });*/
-
             // Append movieDiv til containeren
             container.appendChild(movieDiv);
         });
     })
     .catch(error => console.log('Error:', error));
 
+// Funktion til at vise filmens detaljer
 function showMovieDetails(movie) {
-    // Opdater detaljerne i sektionen
+    const detailsSection = document.getElementById("movie-details");  // Henter detaljer-sektionen
+    const moviePoster = document.getElementById("moviePoster");       // Henter plakat-elementet
+    const movieTitle = document.getElementById("movieTitle");         // Henter titel-elementet
+    const movieDescription = document.getElementById("movieDescription"); // Henter beskrivelse-elementet
+    const movieDuration = document.getElementById("movieDuration");   // Henter varighed-elementet
+    const movieAgeLimit = document.getElementById("movieAgeLimit");   // Henter aldersgrænse-elementet
+    const movieShowtimes = document.getElementById("movieShowtimes"); // Henter visningstider-elementet
+
+    // Kontrollér ID og opdater filmens detaljer i DOM'en
+    console.log("Movie ID modtaget: ", movie.id);
     moviePoster.src = movie.picture;
     movieTitle.textContent = movie.title;
     movieDescription.textContent = movie.description;
     movieDuration.textContent = `Varighed: ${movie.durationEkstra}`;
     movieAgeLimit.textContent = `Aldersgrænse: ${movie.ageLimit}`;
 
-    // Ryd tidligere showtimes og opdater med de nye fra backend
+    // Ryd tidligere visningstider og fetch de nye baseret på filmens ID
     movieShowtimes.innerHTML = '';
 
-    // Fetch visningstider fra backend baseret på filmens ID
-    fetch(`http://localhost:8080/api/showtimes/movie/${movie.id}`)
+    // Fetch visningstider baseret på filmens ID
+    fetch(`http://localhost:8080/api/showTimes/movie/${movie.id}`)
         .then(response => response.json())
         .then(showtimes => {
+            // Opdater visningstider i DOM'en
             if (showtimes.length > 0) {
                 showtimes.forEach(showtime => {
                     const showtimeDiv = document.createElement('div');
                     showtimeDiv.classList.add('showtime');
-                    showtimeDiv.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal:${showtime.theaterID.name}`;
+                    showtimeDiv.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theaterID.id}`;
                     movieShowtimes.appendChild(showtimeDiv);
                 });
             } else {
