@@ -74,7 +74,7 @@ function showMovieDetails(movie) {
                 showtimes.forEach(showtime => {
                     const showtimeDiv = document.createElement('div');
                     showtimeDiv.classList.add('showtime');
-                    showtimeDiv.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theaterID.id}`;
+                    showtimeDiv.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theater.id}`;
                     movieShowtimes.appendChild(showtimeDiv);
                 });
             } else {
