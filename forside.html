@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biograf Hjemmeside</title>
     <link rel="stylesheet" href="css/biografstyling.css">
+    <link rel="stylesheet" href="css/unikMovieStyling.css">
 </head>
 <body>
     <!-- Header med biografnavn og menu -->
@@ -30,6 +31,25 @@
     <section class="movie-grid" id="movie-container">
         <!-- Dynamisk filmdata kan tilføjes her -->
     </section>
+
+    <!-- Sektion til at vise filmens detaljer, starter skjult -->
+    <section id="movie-details" style="display: none;">
+        <div class="movie-details-container">
+            <img id="moviePoster" src="" alt="Film plakat">
+            <div class="movie-info">
+                <h1 id="movieTitle"></h1>
+                <p id="movieDescription"></p>
+                <p id="movieDuration"></p>
+                <p id="movieAgeLimit"></p>
+                <div id="movieShowtimes" class="showtimes-container">
+                    <!-- Visningstider bliver dynamisk tilføjet her -->
+                </div>
+                <button id="backToMovies">Tilbage til filmoversigt</button>
+            </div>
+        </div>
+    </section>
+
+
 
     <!-- Footer -->
     <footer>
