@@ -1,0 +1,39 @@
+.seat-container {
+    display: grid;
+    grid-gap: 5px;
+    margin-bottom: 20px;
+}
+
+#small-theater .seat-container {
+    grid-template-columns: repeat(12, 30px);
+    grid-template-rows: repeat(20, 30px);
+}
+
+#large-theater .seat-container {
+    grid-template-columns: repeat(16, 30px);
+    grid-template-rows: repeat(25, 30px);
+}
+
+.seat {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: green;
+}
+
+.seat.available {
+    background-color: green;
+}
+
+.seat.unavailable {
+    background-color: red;
+}
+
+.seat.special {
+    background-color: blue;
+}
+
+
+.seat.selected {
+    background-color: orange;
+}
