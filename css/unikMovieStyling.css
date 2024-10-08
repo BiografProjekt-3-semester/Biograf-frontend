@@ -12,6 +12,7 @@
 
 .movie-info {
     flex: 1;
+    color: white;
 }
 
 .movie h1 {
@@ -36,16 +37,18 @@
     background-color: #44b669; /* Grøn baggrund som i eksemplet */
     color: white;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 10px;
     text-align: center;
     width: 150px;
     font-weight: bold;
 }
 
 #backToMovies {
+    font-weight: bold;
+    font-size: 20px;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #444;
+    background-color: #ff5733;
     color: white;
     border: none;
     border-radius: 5px;
