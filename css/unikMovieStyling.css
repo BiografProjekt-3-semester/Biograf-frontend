@@ -14,9 +14,14 @@
     flex: 1;
 }
 
-.movie-info h1 {
+.movie h1 {
     font-size: 2em;
     margin-bottom: 10px;
+}
+.movie p {
+    font-size: 2em;
+    margin-bottom: 8px;
+    color: white;
 }
 
 .showtimes-container {
