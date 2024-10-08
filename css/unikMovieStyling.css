@@ -19,7 +19,8 @@
     margin-bottom: 10px;
 }
 .movie p {
-    font-size: 2em;
+    font-size: 20px;
+    text-align: left;
     margin-bottom: 8px;
     color: white;
 }
