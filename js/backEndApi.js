@@ -87,3 +87,13 @@ function showMovieDetails(movie) {
     container.style.display = "none";
     detailsSection.style.display = "block";
 }
+
+// Implementering af knappen "Tilbage til filmoversigt"
+document.getElementById('backToMovies').addEventListener('click', function () {
+    // Skjul sektionen med filmens detaljer
+    document.getElementById('movie-details').style.display = 'hidden';
+
+    // Vis sektionen med filmene (hvis du har en sektion til filmoversigten)
+    document.getElementById('movie-container').style.display = 'block';
+    window.location.reload();
+});
