@@ -6,56 +6,103 @@
     <title>Biograf Hjemmeside</title>
     <link rel="stylesheet" href="css/biografstyling.css">
     <link rel="stylesheet" href="css/unikMovieStyling.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header med biografnavn og menu -->
-    <header class="header">
-        <div class="logo">BioCinema</div>
-        <nav>
-            <ul>
-                <li><a href="#">Hjem</a></li>
-                <li><a href="#">Film</a></li>
-                <li><a href="#">Billetter</a></li>
-                <li><a href="#">Om os</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Header med biografnavn og menu -->
+<header class="header">
+    <div class="logo">BioCinema</div>
+    <nav>
+        <ul>
+            <li><a href="#">Hjem</a></li>
+            <li><a href="#">Film</a></li>
+            <li><a href="#">Billetter</a></li>
+            <li><a href="#">Om os</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <!-- Hovedsektion med filmplakater -->
-    <section class="hero-section">
-        <h1>Velkommen til BioCinema</h1>
-        <p>Oplev de nyeste film i din lokale biograf</p>
-    </section>
+<!-- Hovedsektion med filmplakater -->
+<section class="hero-section">
+    <h1>Velkommen til BioCinema</h1>
+    <p>Oplev de nyeste film i din lokale biograf</p>
+</section>
 
-    <!-- Filmliste i grid -->
-    <section class="movie-grid" id="movie-container">
-        <!-- Dynamisk filmdata kan tilføjes her -->
-    </section>
+<!-- Filmliste i grid -->
+<section class="movie-grid" id="movie-container">
+    <!-- Dynamisk filmdata kan tilføjes her -->
+</section>
 
-    <!-- Sektion til at vise filmens detaljer, starter skjult -->
-    <section id="movie-details" style="display: none;">
-        <div class="movie-details-container">
-            <img id="moviePoster" src="" alt="Film plakat">
-            <div class="movie-info">
-                <h1 id="movieTitle"></h1>
-                <p id="movieDescription"></p>
-                <p id="movieDuration"></p>
-                <p id="movieAgeLimit"></p>
-                <div id="movieShowtimes" class="showtimes-container">
-                    <!-- Visningstider bliver dynamisk tilføjet her -->
-                </div>
-                <button id="backToMovies">Tilbage til filmoversigt</button>
+<!-- Sektion til at vise filmens detaljer, starter skjult -->
+<section id="movie-details" style="display: none;">
+    <div class="movie-details-container">
+        <img id="moviePoster" src="" alt="Film plakat">
+        <div class="movie-info">
+            <h1 id="movieTitle"></h1>
+            <p id="movieDescription"></p>
+            <p id="movieDuration"></p>
+            <p id="movieAgeLimit"></p>
+            <div id="movieShowtimes" class="showtimes-container">
+                <!-- Visningstider bliver dynamisk tilføjet her -->
+            </div>
+            <button id="backToMovies">Tilbage til filmoversigt</button>
+        </div>
+    </div>
+</section>
+
+<section id="Showtime-details" style="display: none;">
+    <div id="showtime-links-container">
+        <!-- Showtime links vil blive genereret her dynamisk -->
+    </div>
+
+    <div class="theater-container">
+        <div id="small-theater" class="seat-container"></div>
+        <div id="large-theater" class="seat-container"></div>
+
+        <div class="color-legend">
+            <div class="legend-item">
+                <div class="legend-color orange"></div>
+                <span>Dit valg</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color green"></div>
+                <span>Ledig</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color red"></div>
+                <span>Reserveret</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color blue"></div>
+                <span>Handicap</span>
             </div>
         </div>
-    </section>
+
+        <label for="ticket-count">Vælg antal billetter:</label>
+        <select id="ticket-count">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <button onclick="reserveSeats()">Reserver</button>
+    </div>
+</section>
 
 
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2024 BioCinema - Alle rettigheder forbeholdes</p>
-    </footer>
+<!-- Footer -->
+<footer>
+    <p>© 2024 BioCinema - Alle rettigheder forbeholdes</p>
+</footer>
 
-    <script src="js/backEndApi.js"></script>
+<script src="js/backEndApi.js"></script>
+<script src="salOversigt.js"></script>
+<script src="js/heroVisibility.js"></script>
 </body>
 </html>

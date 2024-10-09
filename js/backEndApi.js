@@ -1,6 +1,6 @@
 const container = document.getElementById('movie-container');
 
-// Fetch data from your backend API
+// Fetch data from your backend API to get all movies
 fetch('http://localhost:8080/movie/getAllMovies')
     .then(response => response.json())
     .then(data => {
@@ -46,16 +46,15 @@ fetch('http://localhost:8080/movie/getAllMovies')
 
 // Funktion til at vise filmens detaljer
 function showMovieDetails(movie) {
-    const detailsSection = document.getElementById("movie-details");  // Henter detaljer-sektionen
-    const moviePoster = document.getElementById("moviePoster");       // Henter plakat-elementet
-    const movieTitle = document.getElementById("movieTitle");         // Henter titel-elementet
-    const movieDescription = document.getElementById("movieDescription"); // Henter beskrivelse-elementet
-    const movieDuration = document.getElementById("movieDuration");   // Henter varighed-elementet
-    const movieAgeLimit = document.getElementById("movieAgeLimit");   // Henter aldersgrænse-elementet
-    const movieShowtimes = document.getElementById("movieShowtimes"); // Henter visningstider-elementet
+    const detailsSection = document.getElementById("movie-details");
+    const moviePoster = document.getElementById("moviePoster");
+    const movieTitle = document.getElementById("movieTitle");
+    const movieDescription = document.getElementById("movieDescription");
+    const movieDuration = document.getElementById("movieDuration");
+    const movieAgeLimit = document.getElementById("movieAgeLimit");
+    const movieShowtimes = document.getElementById("movieShowtimes");
 
     // Kontrollér ID og opdater filmens detaljer i DOM'en
-    console.log("Movie ID modtaget: ", movie.id);
     moviePoster.src = movie.picture;
     movieTitle.textContent = movie.title;
     movieDescription.textContent = movie.description;
@@ -69,13 +68,25 @@ function showMovieDetails(movie) {
     fetch(`http://localhost:8080/api/showTimes/movie/${movie.id}`)
         .then(response => response.json())
         .then(showtimes => {
-            // Opdater visningstider i DOM'en
             if (showtimes.length > 0) {
                 showtimes.forEach(showtime => {
-                    const showtimeDiv = document.createElement('div');
-                    showtimeDiv.classList.add('showtime');
-                    showtimeDiv.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theater.id}`;
-                    movieShowtimes.appendChild(showtimeDiv);
+                    // Opret en knap til hver showtime
+                    const showtimeButton = document.createElement('button');
+                    showtimeButton.classList.add('showtime', 'available');
+                    showtimeButton.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theater.id}`;
+
+                    // Event-handler for showtime-knappen
+                    showtimeButton.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        console.log("Clicked showtime ID: ", showtime.id);
+                        sessionStorage.setItem('selectedShowtimeId', showtime.id);
+                        console.log("Stored showtime ID in sessionStorage: ", sessionStorage.getItem('selectedShowtimeId'));
+                        detailsSection.style.display = 'none';
+                        document.getElementById('Showtime-details').style.display = 'block';
+                        generateSeats(showtime.id);
+                    });
+
+                    movieShowtimes.appendChild(showtimeButton);
                 });
             } else {
                 movieShowtimes.textContent = "Ingen visningstider tilgængelige";
@@ -87,13 +98,3 @@ function showMovieDetails(movie) {
     container.style.display = "none";
     detailsSection.style.display = "block";
 }
-
-// Implementering af knappen "Tilbage til filmoversigt"
-document.getElementById('backToMovies').addEventListener('click', function () {
-    // Skjul sektionen med filmens detaljer
-    document.getElementById('movie-details').style.display = 'hidden';
-
-    // Vis sektionen med filmene (hvis du har en sektion til filmoversigten)
-    document.getElementById('movie-container').style.display = 'block';
-    window.location.reload();
-});
