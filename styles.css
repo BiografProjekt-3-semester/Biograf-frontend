@@ -1,17 +1,19 @@
-.seat-container {
-    display: grid;
-    grid-gap: 5px;
-    margin-bottom: 20px;
-}
-
-#small-theater .seat-container {
+#small-theater {
+    display: none; /* Sørg for, at det skjules som standard */
     grid-template-columns: repeat(12, 30px);
     grid-template-rows: repeat(20, 30px);
 }
 
-#large-theater .seat-container {
+#large-theater {
+    display: none; /* Sørg for, at det skjules som standard */
     grid-template-columns: repeat(16, 30px);
     grid-template-rows: repeat(25, 30px);
+}
+
+.seat-container {
+    display: grid;
+    grid-gap: 5px;
+    justify-content: center; /* Centrer sædeoversigten */
 }
 
 .seat {
@@ -36,4 +38,57 @@
 
 .seat.selected {
     background-color: orange;
+}
+
+.theater-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px; /* Mindre margin for at bringe elementerne tættere sammen */
+}
+
+.seat-container {
+    display: grid;
+    grid-gap: 5px;
+    margin-bottom: 10px; /* Reduceret margin mellem sædeoversigten og farveindikatorerne */
+    justify-content: center; /* Center sædeoversigten */
+}
+
+.color-legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 0 0; /* Kun topmargin for at justere placeringen præcist */
+    padding: 0; /* Fjern padding for at holde det tæt */
+    background-color: transparent; /* Sørg for, at baggrunden er gennemsigtig */
+    border: none; /* Fjern kantlinjen */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 5px; /* Juster spacing mellem hver farveindikator */
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    margin-right: 5px;
+}
+
+.legend-color.orange {
+    background-color: orange;
+}
+
+.legend-color.green {
+    background-color: green;
+}
+
+.legend-color.red {
+    background-color: red;
+}
+
+.legend-color.blue {
+    background-color: blue;
 }

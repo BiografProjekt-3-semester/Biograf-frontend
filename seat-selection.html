@@ -13,27 +13,43 @@
     <!-- Showtime links vil blive genereret her dynamisk -->
 </div>
 
-<div id="small-theater">
-    <div class="seat-container"></div>
-</div>
+<div class="theater-container">
+    <div id="small-theater" class="seat-container"></div>
+    <div id="large-theater" class="seat-container"></div>
 
-<div id="large-theater">
-    <div class="seat-container"></div>
-</div>
+    <div class="color-legend">
+        <div class="legend-item">
+            <div class="legend-color orange"></div>
+            <span>Dit valg</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color green"></div>
+            <span>Ledig</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color red"></div>
+            <span>Reserveret</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color blue"></div>
+            <span>Handicap</span>
+        </div>
+    </div>
 
-<label for="ticket-count">Vælg antal billetter:</label>
-<select id="ticket-count">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-</select>
-<button onclick="reserveSeats()">Reserver</button>
+    <label for="ticket-count">Vælg antal billetter:</label>
+    <select id="ticket-count">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+    <button onclick="reserveSeats()">Reserver</button>
+</div>
 
 <script src="salOversigt.js"></script>
 </body>

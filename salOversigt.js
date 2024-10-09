@@ -20,7 +20,7 @@ async function generateShowtimeLinks() {
 }
 
 // Kald funktionen for at generere showtime-links, når siden indlæses
-generateShowtimeLinks();
+
 
 // Funktion til at hente showtimeId fra URL'en
 function getShowtimeIdFromUrl() {
@@ -28,13 +28,39 @@ function getShowtimeIdFromUrl() {
     return params.get('showtimeId');
 }
 
+// Ny funktion til at kontrollere om showtimeId er til stede og vise/skjule elementer baseret på det
+function checkShowtimeId() {
+    const showtimeId = getShowtimeIdFromUrl();
+    const theaterContainer = document.querySelector('.theater-container');
+
+    // Hvis der ikke er noget showtimeId, skjul sædeoversigt og farveindikatorer
+    if (!showtimeId) {
+        theaterContainer.style.display = 'none';
+    } else {
+        theaterContainer.style.display = 'block';
+    }
+}
+
+generateShowtimeLinks();
+
+checkShowtimeId();
+
 const showtimeId = getShowtimeIdFromUrl(); // Dynamisk showtimeId baseret på brugerens valg
 generateSeats(showtimeId);
 
 // Funktion til generering af sæder baseret på showtime ID
+// Funktion til generering af sæder baseret på showtime ID
 async function generateSeats(showtimeId) {
     const theaterType = await getTheaterTypeFromShowtime(showtimeId);
-    const seatContainer = document.querySelector(`#${theaterType} .seat-container`);
+    const smallTheater = document.getElementById('small-theater');
+    const largeTheater = document.getElementById('large-theater');
+
+    // Skjul begge teatre til at begynde med
+    smallTheater.style.display = 'none';
+    largeTheater.style.display = 'none';
+
+    const seatContainer = theaterType === 'small-theater' ? smallTheater : largeTheater;
+    seatContainer.style.display = 'grid'; // Vis kun det relevante teater
     seatContainer.innerHTML = ''; // Tøm containeren først
 
     const theaterId = theaterType === 'small-theater' ? 1 : 2;
@@ -54,9 +80,12 @@ async function generateSeats(showtimeId) {
         seatElement.dataset.chairId = chair.id;
         seatElement.dataset.row = chair.rowNr;
         seatElement.dataset.seat = chair.chairNr;
+        seatElement.dataset.special = chair.special;
 
         // Marker sædet som ledigt eller reserveret baseret på de bookede sæder fra backend
-        if (bookedChairIds.includes(chair.id)) {
+        if (chair.special) {
+            seatElement.classList.add('special');
+        } else if (bookedChairIds.includes(chair.id)) {
             seatElement.classList.add('unavailable'); // Reserveret sæde
         } else {
             seatElement.classList.add('available'); // Ledigt sæde
@@ -67,20 +96,23 @@ async function generateSeats(showtimeId) {
     });
 }
 
+
 // Funktion til at håndtere sædevalg og farver
 function handleSeatSelection(seatElement) {
     const maxSeats = parseInt(document.getElementById("ticket-count").value);
 
-    if (seatElement.classList.contains('available') && selectedSeats.length < maxSeats) {
-        seatElement.classList.remove('available');
-        seatElement.classList.add('selected'); // Markér valgte sæder med orange
-        selectedSeats.push(seatElement.dataset.chairId);
+    if (seatElement.classList.contains('available') || seatElement.classList.contains('special')) {
+        if (selectedSeats.length < maxSeats) {
+            seatElement.classList.remove('available', 'special');
+            seatElement.classList.add('selected'); // Markér valgte sæder med orange
+            selectedSeats.push(seatElement.dataset.chairId);
+        } else {
+            alert(`Du kan kun vælge ${maxSeats} sæde(r)`);
+        }
     } else if (seatElement.classList.contains('selected')) {
         seatElement.classList.remove('selected');
-        seatElement.classList.add('available');
+        seatElement.classList.add(seatElement.dataset.special === 'true' ? 'special' : 'available');
         selectedSeats = selectedSeats.filter(id => id !== seatElement.dataset.chairId);
-    } else if (selectedSeats.length >= maxSeats) {
-        alert(`Du kan kun vælge ${maxSeats} sæde(r)`);
     }
 }
 
