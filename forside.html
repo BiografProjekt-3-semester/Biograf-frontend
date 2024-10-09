@@ -42,6 +42,9 @@
             <p id="movieDescription"></p>
             <p id="movieDuration"></p>
             <p id="movieAgeLimit"></p>
+            <label for="showtime-date">Vælg dato:</label>
+            <input type="date" id="showtime-date">
+            <button id="filter-showtimes" onclick="filterShowtimesByDate()">Filtrér visningstider</button>
             <div id="movieShowtimes" class="showtimes-container">
                 <!-- Visningstider bliver dynamisk tilføjet her -->
             </div>

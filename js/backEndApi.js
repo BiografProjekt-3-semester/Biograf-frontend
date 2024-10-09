@@ -54,6 +54,8 @@ function showMovieDetails(movie) {
     const movieAgeLimit = document.getElementById("movieAgeLimit");
     const movieShowtimes = document.getElementById("movieShowtimes");
 
+    sessionStorage.setItem('selectedMovieId', movie.id);
+
     // Kontrollér ID og opdater filmens detaljer i DOM'en
     moviePoster.src = movie.picture;
     movieTitle.textContent = movie.title;
@@ -97,4 +99,46 @@ function showMovieDetails(movie) {
     // Skjul filmoversigten og vis filmens detaljer
     container.style.display = "none";
     detailsSection.style.display = "block";
+}
+
+function filterShowtimesByDate() {
+    const movieShowtimes = document.getElementById("movieShowtimes");
+    const selectedDate = document.getElementById("showtime-date").value;
+    const movieId = sessionStorage.getItem('selectedMovieId'); // Retrieve the saved movie ID
+
+    if (!selectedDate) {
+        alert("Vælg venligst en dato.");
+        return;
+    }
+
+    // Clear current showtimes
+    movieShowtimes.innerHTML = '';
+
+    // Fetch showtimes for the selected date and movie
+    fetch(`http://localhost:8080/api/showTimes/movie/${movieId}?date=${selectedDate}`)
+        .then(response => response.json())
+        .then(showtimes => {
+            if (showtimes.length > 0) {
+                showtimes.forEach(showtime => {
+                    // Create a button for each showtime
+                    const showtimeButton = document.createElement('button');
+                    showtimeButton.classList.add('showtime', 'available');
+                    showtimeButton.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theater.id}`;
+
+                    // Add click event for the showtime button
+                    showtimeButton.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        sessionStorage.setItem('selectedShowtimeId', showtime.id);
+                        document.getElementById('movie-details').style.display = 'none';
+                        document.getElementById('Showtime-details').style.display = 'block';
+                        generateSeats(showtime.id);
+                    });
+
+                    movieShowtimes.appendChild(showtimeButton);
+                });
+            } else {
+                movieShowtimes.textContent = "Ingen visningstider tilgængelige for den valgte dato.";
+            }
+        })
+        .catch(error => console.log('Error:', error));
 }
