@@ -31,10 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
         })
             .then(response => response.json())
             .then(data => {
+                window.location.reload();
                 console.log('Succes:', data);
                 alert('Filmen blev oprettet succesfuldt!');
                 // Nulstil formularen efter succes
-                movieForm.reset();
+                const modalElement = document.getElementById('addShowtimeModal');
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                modalInstance.hide();
+
+                // Nulstil formularen efter success
+                document.getElementById('add-showtime-form').reset();
             })
             .catch((error) => {
                 console.error('Fejl ved oprettelse af filmen:', error);

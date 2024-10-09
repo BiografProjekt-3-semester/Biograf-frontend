@@ -80,8 +80,8 @@ function updateMovie(movieId) {
         duration: newDuration,
     };
 
-    fetch(`http://localhost:8080/movie/update/${movieId}`, {
-        method: 'PUT',
+    fetch(`http://localhost:8080/movie/${movieId}`, {
+        method: 'Patch',
         headers: {
             'Content-Type': 'application/json',
         },
