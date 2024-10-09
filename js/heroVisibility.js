@@ -24,4 +24,5 @@ updateHeroSectionVisibility();
 // Lyt til ændringer i sektionerne for at opdatere synligheden af heroSection dynamisk
 document.getElementById('backToMovies').addEventListener('click', () => {
     updateHeroSectionVisibility();
+    window.location.reload();
 });
