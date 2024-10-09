@@ -95,7 +95,17 @@ function handleSeatSelection(seatElement) {
         seatElement.classList.add(seatElement.dataset.special === 'true' ? 'special' : 'available');
         selectedSeats = selectedSeats.filter(id => id !== seatElement.dataset.chairId);
     }
+    sessionStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
+    console.log("Valgte sæder gemt i sessionStorage: ", sessionStorage.getItem('selectedSeats'));
 }
 
 // Variabel til at holde styr på valgte sæder
 let selectedSeats = [];
+document.addEventListener('DOMContentLoaded', function() {
+    const savedSeats = sessionStorage.getItem('selectedSeats');
+    if (savedSeats) {
+        selectedSeats = JSON.parse(savedSeats);
+        console.log("Hentede valgte sæder fra sessionStorage: ", selectedSeats);
+    }
+
+});
