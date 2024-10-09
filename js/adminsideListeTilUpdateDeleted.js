@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('movie-container');
 
     if (container) {
-        // Your fetch and movie rendering code goes here
         fetch('http://localhost:8080/movie/getAllMovies')
             .then(response => response.json())
             .then(data => {
@@ -30,21 +29,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Create Update Button
                     const updateButton = document.createElement('button');
                     updateButton.textContent = 'Update';
-                    updateButton.classList.add('btn', 'btn-warning'); // Bootstrap styling for warning button
+                    updateButton.classList.add('btn', 'btn-warning');
 
                     // Create Delete Button
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
-                    deleteButton.classList.add('btn', 'btn-danger'); // Bootstrap styling for danger button
+                    deleteButton.classList.add('btn', 'btn-danger');
 
-                    // Add event listener for update functionality
                     updateButton.addEventListener('click', function () {
-                        updateMovie(movie.id); // Call a function to handle the update logic
+                        // Brug modal-vinduet og fyld det med filmdata
+                        openUpdateModal(movie);
                     });
 
-                    // Add event listener for delete functionality
                     deleteButton.addEventListener('click', function () {
-                        deleteMovie(movie.id); // Call a function to handle the delete logic
+                        deleteMovie(movie.id);
                     });
 
                     movieDiv.appendChild(moviePoster);
@@ -52,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     movieDiv.appendChild(movieDescription);
                     movieDiv.appendChild(movieDuration);
                     movieDiv.appendChild(movieAgeLimit);
-                    movieDiv.appendChild(updateButton);  // Append the update button
+                    movieDiv.appendChild(updateButton);
                     movieDiv.appendChild(deleteButton);
 
                     container.appendChild(movieDiv);
@@ -63,25 +61,39 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Error: The movie container was not found.");
     }
 });
+function openUpdateModal(movie) {
+    const titleInput = document.getElementById('UPmovieTitle');
+    const durationEkstra = document.getElementById('UPmovieDirector');
+    const ageLimit = document.getElementById('UPmovieLimit');
+    const genreInput = document.getElementById('UPmovieGenre');
 
-// Function to handle movie updates
-function updateMovie(movieId) {
-    // This is a placeholder for a more complex update logic
-    // You could open a modal with a form to update the movie's details
-    const newTitle = prompt("Enter the new title for the movie:");
-    const newDescription = prompt("Enter the new description for the movie:");
-    const newAgeLimit = prompt("Enter the new age limit:");
-    const newDuration = prompt("Enter the new duration in minutes:");
+    // Fyld modalens inputfelter med de nuværende værdier fra filmen
+    titleInput.value = movie.title;
+    durationEkstra.value = movie.durationEkstra;
+    ageLimit.value = movie.ageLimit;
+    genreInput.value = movie.description;
 
-    const updatedMovie = {
-        title: newTitle,
-        description: newDescription,
-        ageLimit: newAgeLimit,
-        duration: newDuration,
+    // Tilføj event listener til "Save"-knappen (kun én gang)
+    const saveButton = document.getElementById('saveButton');
+    saveButton.onclick = function() {
+        const updatedMovie = {
+            title: titleInput.value,
+            durationEkstra: durationEkstra.value,
+            ageLimit: ageLimit.value,
+            description: genreInput.value
+        };
+
+        updateMovie(movie.id, updatedMovie); // Opdater filmen
     };
 
+    // Åbn modal med Bootstrap
+    var updateModal = new bootstrap.Modal(document.getElementById('updateModal'));
+    updateModal.show();
+}
+
+function updateMovie(movieId, updatedMovie) {
     fetch(`http://localhost:8080/movie/${movieId}`, {
-        method: 'Patch',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -89,8 +101,7 @@ function updateMovie(movieId) {
     })
         .then(response => {
             if (response.ok) {
-                alert('Movie updated successfully');
-                location.reload(); // Reload the page to reflect the updated movie details
+                location.reload(); // Opdater siden for at vise den opdaterede film
             } else {
                 alert('Failed to update the movie');
             }

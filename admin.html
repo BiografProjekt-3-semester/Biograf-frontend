@@ -13,10 +13,49 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/biografstyling.css">
     <script src="js/adminMakeMovie.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-mrcA6bckw5B8nuWFLiWck67zo/iNocAlAYaFptrC2UU58A4iw6j6c8v/sucGhL14" crossorigin="anonymous"></script>
     <script src="js/adminsideListeTilUpdateDeleted.js"></script>
     <link rel="stylesheet" href="css/unikMovieStyling.css">
 </head>
 <body>
+<!-- Bootstrap Modal Structure -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">Update Movie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="UPmovieTitle" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="UPmovieTitle" placeholder="Enter movie title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="UPmovieDirector" class="form-label">lenght</label>
+                        <input type="text" class="form-control" id="UPmovieDirector" placeholder="Enter movie director">
+                    </div>
+                    <div class="mb-3">
+                        <label for="UPmovieLimit" class="form-label">Age limit</label>
+                        <input type="number" class="form-control" id="UPmovieLimit" placeholder="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="UPmovieGenre" class="form-label">Genre</label>
+                        <input type="text" class="form-control" id="UPmovieGenre" placeholder="Enter movie genre">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="saveButton" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Header med biografnavn og menu -->
 <header class="header">
