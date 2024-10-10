@@ -9,7 +9,7 @@ async function fetchReservationAndCustomer() {
 
     try {
         // Hent reservationen fra API'et
-        const reservationResponse = await fetch(`http://localhost:8080/api/reservations/${reservationId}`);
+        const reservationResponse = await fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/reservations/${reservationId}`);
         if (!reservationResponse.ok) {
             throw new Error('Failed to fetch reservation data');
         }
@@ -17,7 +17,7 @@ async function fetchReservationAndCustomer() {
 
 
         // Hent kunden fra API'et
-        const customerResponse = await fetch(`http://localhost:8080/api/customers/${customerDataID}`);
+        const customerResponse = await fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/customers/${customerDataID}`);
         if (!customerResponse.ok) {
             throw new Error('Failed to fetch customer data');
         }

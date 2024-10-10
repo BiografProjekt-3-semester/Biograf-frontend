@@ -26,7 +26,7 @@ function createReservation(price) {
     console.log('Sending reservationData:', JSON.stringify(reservationData));
 
     // Send POST-anmodning for at oprette en reservation
-    fetch('http://localhost:8080/api/reservations', {
+    fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/reservations', {
         method: 'POST',            // HTTP-metode
         headers: {
             'Content-Type': 'application/json',  // Angiver, at vi sender JSON
@@ -76,7 +76,7 @@ function createBookedChair(reservationId, chairObject) {
     console.log('Sending bookedChairData:', JSON.stringify(bookedChairData));
 
     // Send POST-anmodning for at oprette en booked chair
-    fetch('http://localhost:8080/api/bookedchair', {
+    fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/bookedchair', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

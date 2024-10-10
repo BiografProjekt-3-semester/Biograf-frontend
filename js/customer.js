@@ -44,7 +44,7 @@ document.getElementById("customerForm").addEventListener("submit", function(even
     }
 
     // Sender data til backend (API-endpoint skal opdateres med din rigtige URL)
-    fetch('http://localhost:8080/api/customers', {
+    fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/customers', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -8,7 +8,7 @@ let selectedSeats = [];
 
 async function getTheaterTypeFromShowtime(showtimeId) {
     try {
-        const response = await fetch(`http://localhost:8080/api/showTimes/${showtimeId}`);
+        const response = await fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes/${showtimeId}`);
         const showtime = await response.json();
 
         // Returner teater typen baseret på showtime's theater ID
@@ -49,12 +49,12 @@ async function generateSeats(showtimeId) {
     const theaterId = theaterType === 'small-theater' ? 1 : 2;
 
     try {
-        const chairResponse = await fetch(`http://localhost:8080/chairs/theater/${theaterId}`);
+        const chairResponse = await fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/chairs/theater/${theaterId}`);
         const chairs = await chairResponse.json();
         console.log("Chairs retrieved: ", chairs);
 
         // Hent alle bookede sæder for showtime
-        const bookedChairsResponse = await fetch(`http://localhost:8080/api/bookedchair/showtime/${showtimeId}`);
+        const bookedChairsResponse = await fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/bookedchair/showtime/${showtimeId}`);
         const bookedChairs = await bookedChairsResponse.json();
         const bookedChairIds = bookedChairs.map(bookedChair => bookedChair.chair.id);
         console.log("Booked chairs for showtime ID ", showtimeId, ": ", bookedChairIds);

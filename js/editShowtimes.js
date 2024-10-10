@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const editShowtimeForm = document.getElementById('edit-showtime-form');
 
     // Fetch all movies and populate movie dropdown
-    fetch('http://localhost:8080/movie/getAllMovies')
+    fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/getAllMovies')
         .then(response => response.json())
         .then(movies => {
             movies.forEach(movie => {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Listen for movie selection change and fetch showtimes for the selected movie
     movieSelect.addEventListener('change', function() {
         const movieId = movieSelect.value;
-        fetch(`http://localhost:8080/api/showTimes/movie/${movieId}`)
+        fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes/movie/${movieId}`)
             .then(response => response.json())
             .then(showtimes => {
                 showtimeSelect.innerHTML = '<option value="" disabled selected>Vælg en showtime</option>'; // Clear old options
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Populate form with showtime data when a showtime is selected
     showtimeSelect.addEventListener('change', function() {
         const showtimeId = showtimeSelect.value;
-        fetch(`http://localhost:8080/api/showTimes/${showtimeId}`)
+        fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes/${showtimeId}`)
             .then(response => response.json())
             .then(showtime => {
                 document.getElementById('editMovieDate').value = showtime.movieDate;
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
             price: parseFloat(document.getElementById('editPrice').value)
         };
 
-        fetch(`http://localhost:8080/api/showTimes/${showtimeId}`, {
+        fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes/${showtimeId}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

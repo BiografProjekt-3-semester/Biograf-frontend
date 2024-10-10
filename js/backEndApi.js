@@ -1,7 +1,7 @@
 const container = document.getElementById('movie-container');
 
 // Fetch data from your backend API to get all movies
-fetch('http://localhost:8080/movie/getAllMovies')
+fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/getAllMovies')
     .then(response => response.json())
     .then(data => {
         // Hvis dit backend-API returnerer en liste af film
@@ -70,7 +70,7 @@ function showMovieDetails(movie) {
     movieShowtimes.innerHTML = '';
 
     // Fetch visningstider baseret på filmens ID
-    fetch(`http://localhost:8080/api/showTimes/movie/${movie.id}`)
+    fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes/movie/${movie.id}`)
         .then(response => response.json())
         .then(showtimes => {
             if (showtimes.length > 0) {
@@ -110,7 +110,7 @@ function filterShowtimesByDate() {
     const movieId = sessionStorage.getItem('selectedMovieId'); // Retrieve the saved movie ID
 
     if (!selectedDate) {
-        fetch(`http://localhost:8080/api/showTimes/movie/${movieId}`)
+        fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes/movie/${movieId}`)
             .then(response => response.json())
             .then(showtimes => {
                 movieShowtimes.innerHTML='';
@@ -142,7 +142,7 @@ function filterShowtimesByDate() {
     movieShowtimes.innerHTML = '';
 
     // Fetch showtimes for the selected date and movie
-    fetch(`http://localhost:8080/api/showTimes/movies/${movieId}?date=${selectedDate}`)
+    fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes/movies/${movieId}?date=${selectedDate}`)
         .then(response => response.json())
         .then(showtimes => {
             if (showtimes.length > 0) {

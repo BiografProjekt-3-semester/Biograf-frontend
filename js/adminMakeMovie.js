@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Send en POST-anmodning til serveren for at oprette filmen
-        fetch('http://localhost:8080/movie/makeMovie', {
+        fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/makeMovie', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

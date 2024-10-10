@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const theaterSelect = document.getElementById('theaterId');  // Tilføj theaterSelect element
 
     // Hent alle film fra API og vis dem i dropdown
-    fetch('http://localhost:8080/movie/getAllMovies')
+    fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/getAllMovies')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Netværksfejl: ' + response.status);
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
     // Hent alle teatre fra API og vis dem i dropdown
-    fetch('http://localhost:8080/api/theaters/getTheaters')  // Justér URL til teater-endpointet
+    fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/theaters/getTheaters')  // Justér URL til teater-endpointet
         .then(response => {
             if (!response.ok) {
                 throw new Error('Netværksfejl: ' + response.status);
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // Send showtime-data til backend
-        fetch('http://localhost:8080/api/showTimes', {
+        fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/api/showTimes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

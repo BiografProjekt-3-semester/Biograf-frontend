@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('movie-container');
 
     if (container) {
-        fetch('http://localhost:8080/movie/getAllMovies')
+        fetch('https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/getAllMovies')
             .then(response => response.json())
             .then(data => {
                 data.forEach(movie => {
@@ -92,7 +92,7 @@ function openUpdateModal(movie) {
 }
 
 function updateMovie(movieId, updatedMovie) {
-    fetch(`http://localhost:8080/movie/${movieId}`, {
+    fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/${movieId}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ function updateMovie(movieId, updatedMovie) {
 
 function deleteMovie(movieId) {
     // Første forespørgsel til at tjekke for showtimes
-    fetch(`http://localhost:8080/movie/${movieId}/check-before-delete`, {
+    fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/${movieId}/check-before-delete`, {
         method: 'GET',
     })
         .then(response => response.text())  // Henter svaret som tekst
@@ -134,7 +134,7 @@ function deleteMovie(movieId) {
 
 function confirmDelete(movieId) {
     // Anden forespørgsel til at slette filmen efter bekræftelse
-    fetch(`http://localhost:8080/movie/${movieId}/delete?confirm=true`, {
+    fetch(`https://biografprojekt-ghdmdwe5csahcbe3.northeurope-01.azurewebsites.net/movie/${movieId}/delete?confirm=true`, {
         method: 'DELETE',
         headers: {
             'Content-type': 'application/json; charset=UTF-8' // Indicates the content
