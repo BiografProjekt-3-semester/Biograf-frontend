@@ -110,7 +110,31 @@ function filterShowtimesByDate() {
     const movieId = sessionStorage.getItem('selectedMovieId'); // Retrieve the saved movie ID
 
     if (!selectedDate) {
-        alert("Vælg venligst en dato.");
+        fetch(`http://localhost:8080/api/showTimes/movie/${movieId}`)
+            .then(response => response.json())
+            .then(showtimes => {
+                movieShowtimes.innerHTML='';
+                if (showtimes.length > 0) {
+                    showtimes.forEach(showtime => {
+                        const showtimeButton = document.createElement('button');
+                        showtimeButton.classList.add('showtime', 'available');
+                        showtimeButton.textContent= `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theater.id}`;
+
+                        showtimeButton.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            sessionStorage.setItem('selectedShowtimeId', showtime.id);
+                            document.getElementById('movie-details').style.display = 'none';
+                            document.getElementById('Showtime-details').style.display = 'block';
+                            generateSeats(showtime.id);
+                        });
+
+                        movieShowtimes.appendChild(showtimeButton);
+                    });
+                } else{
+                    movieShowtimes.textContent = "Ingen visningstider";
+                }
+            })
+            .catch(error=> console.log('Error:', error));
         return;
     }
 
@@ -128,6 +152,7 @@ function filterShowtimesByDate() {
                     showtimeButton.classList.add('showtime', 'available');
                     showtimeButton.textContent = `${showtime.movieDate} - ${showtime.startTime} - Sal: ${showtime.theater.id}`;
 
+
                     // Add click event for the showtime button
                     showtimeButton.addEventListener('click', function(event) {
                         event.preventDefault();
@@ -144,4 +169,8 @@ function filterShowtimesByDate() {
             }
         })
         .catch(error => console.log('Error:', error));
+}
+function clearDateFilter() {
+  document.getElementById("showtime-date").value='';
+  filterShowtimesByDate();
 }
