@@ -50,4 +50,5 @@ document.getElementById("customerForm").addEventListener("submit", function(even
             console.error('Error:', error);
             alert('Der opstod en fejl. Prøv venligst igen.');
         });
+
 });
