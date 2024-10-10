@@ -2,23 +2,6 @@
 // Ny funktion til at kontrollere om showtimeId er til stede og vise/skjule elementer baseret på det
 let selectedSeats = [];
 
-/* function checkShowtimeId() {
-    const showtimeId = getShowtimeIdFromUrl();
-    const theaterContainer = document.querySelector('.theater-container');
-    const heroSection = document.querySelector('.hero-section');
-
-    if (!showtimeId) {
-        theaterContainer.style.display = 'none';
-        heroSection.style.display = 'block'; // Vis hero-sektionen kun hvis der ikke er noget showtimeId
-    } else {
-        theaterContainer.style.display = 'block';
-        heroSection.style.display = 'none'; // Skjul hero-sektionen når vi er på sædeoversigten
-    }
-}
-
-// Kald checkShowtimeId() tidligt for at sikre korrekt visning
-checkShowtimeId();
-*/
 async function getTheaterTypeFromShowtime(showtimeId) {
     try {
         const response = await fetch(`http://localhost:8080/api/showTimes/${showtimeId}`);
@@ -80,12 +63,12 @@ async function generateSeats(showtimeId) {
             seatElement.dataset.seat = chair.chairNr;
             seatElement.dataset.special = chair.special;
 
-            if (chair.special) {
-                seatElement.classList.add('special');
-            } else if (bookedChairIds.includes(chair.id)) {
-                seatElement.classList.add('unavailable');
+            if (bookedChairIds.includes(chair.id)) {
+                seatElement.classList.add('unavailable'); // Hvis sædet er booket, vises det som reserveret
+            } else if (chair.special) {
+                seatElement.classList.add('special'); // Hvis sædet er et handicapsæde, vises det som specielt
             } else {
-                seatElement.classList.add('available');
+                seatElement.classList.add('available'); // Ellers vises det som tilgængeligt
             }
 
             seatElement.addEventListener('click', () => handleSeatSelection(seatElement));
@@ -99,6 +82,12 @@ async function generateSeats(showtimeId) {
 }
 
 function handleSeatSelection(seatElement) {
+
+    if (seatElement.classList.contains('unavailable')) {
+        alert("Det valgte sæde er allerede reserveret. Vælg venligst et nyt."); // Viser en fejlmeddelelse til brugeren
+        return; // Gør ingenting, hvis sædet allerede er reserveret
+    }
+
     const maxSeats = parseInt(document.getElementById("ticket-count").value);
 
     if (seatElement.classList.contains('available') || seatElement.classList.contains('special')) {
