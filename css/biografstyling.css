@@ -50,7 +50,6 @@ body {
 /* Hero sektion */
 .hero-section {
     text-align: center;
-    background-image: url('banner.jpg');
     background-size: cover;
     background-position: center;
     padding: 100px 20px;
@@ -124,6 +123,63 @@ footer {
     .movie-grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
+}
+
+#formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Gør containeren lige så høj som hele skærmen */
+    width: 100%; /* Fylder hele bredden */
+    background-color: black; /* Baggrundsfarve for hele skærmen */
+}
+#customerForm h1 {
+    color: white;
+}
+#customerForm {
+    background-color: #1d1d1d;
+    padding: 30px 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 400px;  /* Maksimal bredde for formen */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tilføjer en let skygge */
+    text-align: left;
+    margin: 0 auto;
+}
+
+#customerForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #f2f2f2;
+}
+
+#customerForm input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #3b3b3b;
+    color: #ffffff;
+}
+
+#customerForm button {
+    background-color: #ff4500;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#customerForm button:hover {
+    background-color: #ff6347;
 }
 
 

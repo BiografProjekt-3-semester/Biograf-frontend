@@ -103,9 +103,30 @@
             <option value="8">8</option>
             <option value="9">9</option>
         </select>
-        <button onclick="createReservation(150)">Reserver</button>
+        <button onclick="goToCustomerForm()">Reserver</button>
     </div>
 </section>
+<div id="formContainer">
+<form id="customerForm" style="display: none">
+    <h1>Indtast dine oplysninger for reservation</h1>
+    <label for="firstName">Fornavn:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+
+    <label for="lastName">Efternavn:</label>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="age">Alder:</label>
+    <input type="number" id="age" name="age" required><br><br>
+
+    <button onclick="createReservation()">Bekræft reservation</button>
+</form>
+</div>
+
+
+
 
 <!-- Footer -->
 <footer>
@@ -115,5 +136,6 @@
 <script src="js/backEndApi.js"></script>
 <script src="js/salOversigt.js"></script>
 <script src="js/reserverAndBookedchair.js"></script>
+<script src="js/customer.js"></script>
 </body>
 </html>
