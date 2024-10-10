@@ -1,6 +1,6 @@
 function createReservation(price) {
     const showtimeId = sessionStorage.getItem('selectedShowtimeId');  // Hent showtimeId fra sessionStorage
-    const selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));  // Hent stolene fra sessionStorage (array af chairId'er)
+    const selectedSeats = JSON.parse(sessionStorage.getItem('selectedSeats'));  // Hent stolene fra sessionStorage (array af chair objekter)
 
     // Tjek om showtimeId er tilgængeligt
     if (!showtimeId) {
@@ -48,9 +48,9 @@ function createReservation(price) {
             // Gem reservations-ID til senere brug i sessionStorage
             sessionStorage.setItem('reservationId', reservationId);
 
-            // Opret bookede stole for hver chairId i selectedSeats
-            selectedSeats.forEach(chairId => {
-                createBookedChair(reservationId, chairId);  // Brug reservationId til at oprette en booked chair
+            // Opret bookede stole for hver stol-objekt i selectedSeats
+            selectedSeats.forEach(chairObject => {
+                createBookedChair(reservationId, chairObject);  // Send hele stol-objektet til createBookedChair
             });
 
             // Ryd `selectedSeats` når alle bookede stole er oprettet
@@ -64,7 +64,9 @@ function createReservation(price) {
         });
 }
 
-function createBookedChair(reservationId, chairId) {
+function createBookedChair(reservationId, chairObject) {
+    const chairId = chairObject.chairId;  // Udpak 'chairId' fra stol-objektet
+
     const bookedChairData = {
         reservation: { id: reservationId },  // Bruger reservations-ID
         chair: { id: chairId },              // Sender kun chairId
