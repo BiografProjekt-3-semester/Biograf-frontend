@@ -6,7 +6,7 @@
     <title>Biograf Hjemmeside</title>
     <link rel="stylesheet" href="css/biografstyling.css">
     <link rel="stylesheet" href="css/unikMovieStyling.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="js/reserverAndBookedchair.js"></script>
 </head>
 <body>
@@ -59,6 +59,12 @@
         <!-- Showtime links vil blive genereret her dynamisk -->
     </div>
 
+    <!-- Ny lærred-visualisering -->
+    <div class="screen-container">
+        <div class="screen-label">LÆRRED</div>
+        <div class="screen-line"></div>
+    </div>
+
     <div class="theater-container">
         <div id="small-theater" class="seat-container"></div>
         <div id="large-theater" class="seat-container"></div>
@@ -82,6 +88,8 @@
             </div>
         </div>
 
+        <div id="selected-seats" class="selected-seats-display">Ingen pladser valgt</div>
+
         <label for="ticket-count">Vælg antal billetter:</label>
         <select id="ticket-count">
             <option value="1">1</option>
@@ -98,16 +106,13 @@
     </div>
 </section>
 
-
-
 <!-- Footer -->
 <footer>
     <p>© 2024 BioCinema - Alle rettigheder forbeholdes</p>
 </footer>
 
 <script src="js/backEndApi.js"></script>
-<script src="salOversigt.js"></script>
-<script src="js/heroVisibility.js"></script>
+<script src="js/salOversigt.js"></script>
 <script src="js/reserverAndBookedchair.js"></script>
 </body>
 </html>
