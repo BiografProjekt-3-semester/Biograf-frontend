@@ -57,7 +57,7 @@ function createReservation(price) {
             sessionStorage.removeItem('selectedSeats');  // Fjerner selectedSeats fra sessionStorage
 
             // Opdater siden efter at have ryddet `selectedSeats`
-            window.location.reload();  // Genindlæs siden
+           // window.location.reload();  // Genindlæs siden
         })
         .catch(error => {
             console.error('Error:', error);  // Håndter eventuelle fejl
@@ -86,7 +86,7 @@ function createBookedChair(reservationId, chairObject) {
         .then(response => {
             if (response.ok) {
                 alert('Booked chair created successfully!');
-                window.location.reload();
+               // window.location.reload();
             } else {
                 alert('Failed to create booked chair.');
             }

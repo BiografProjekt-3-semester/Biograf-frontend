@@ -43,12 +43,13 @@ document.getElementById("customerForm").addEventListener("submit", function(even
         })
         .then(data => {
             alert('Reservation bekræftet! Du vil modtage en email.');
+            const customerDataID = data.id;
+            sessionStorage.setItem('customerDataID', customerDataID);
             // Omdiriger til en bekræftelsesside
-            window.location.href = '/confirmation';
+            //window.location.href = '/confirmation';
         })
         .catch(error => {
             console.error('Error:', error);
             alert('Der opstod en fejl. Prøv venligst igen.');
         });
-
 });

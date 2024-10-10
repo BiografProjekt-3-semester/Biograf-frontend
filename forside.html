@@ -121,7 +121,7 @@
     <label for="age">Alder:</label>
     <input type="number" id="age" name="age" required><br><br>
 
-    <button onclick="createReservation()">Bekræft reservation</button>
+    <button onclick="createReservation(),fetchReservationAndCustomer()">Bekræft reservation</button>
 </form>
 </div>
 
@@ -137,5 +137,6 @@
 <script src="js/salOversigt.js"></script>
 <script src="js/reserverAndBookedchair.js"></script>
 <script src="js/customer.js"></script>
+<script src="js/sendMailToCustomer.js"></script>
 </body>
 </html>
