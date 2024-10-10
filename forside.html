@@ -6,7 +6,8 @@
     <title>Biograf Hjemmeside</title>
     <link rel="stylesheet" href="css/biografstyling.css">
     <link rel="stylesheet" href="css/unikMovieStyling.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/reserverAndBookedchair.js"></script>
 </head>
 <body>
 <!-- Header med biografnavn og menu -->
@@ -58,6 +59,12 @@
         <!-- Showtime links vil blive genereret her dynamisk -->
     </div>
 
+    <!-- Ny lærred-visualisering -->
+    <div class="screen-container">
+        <div class="screen-label">LÆRRED</div>
+        <div class="screen-line"></div>
+    </div>
+
     <div class="theater-container">
         <div id="small-theater" class="seat-container"></div>
         <div id="large-theater" class="seat-container"></div>
@@ -81,6 +88,8 @@
             </div>
         </div>
 
+        <div id="selected-seats" class="selected-seats-display">Ingen pladser valgt</div>
+
         <label for="ticket-count">Vælg antal billetter:</label>
         <select id="ticket-count">
             <option value="1">1</option>
@@ -93,11 +102,9 @@
             <option value="8">8</option>
             <option value="9">9</option>
         </select>
-        <button onclick="reserveSeats()">Reserver</button>
+        <button onclick="createReservation(150)">Reserver</button>
     </div>
 </section>
-
-
 
 <!-- Footer -->
 <footer>
@@ -105,7 +112,7 @@
 </footer>
 
 <script src="js/backEndApi.js"></script>
-<script src="salOversigt.js"></script>
-<script src="js/heroVisibility.js"></script>
+<script src="js/salOversigt.js"></script>
+<script src="js/reserverAndBookedchair.js"></script>
 </body>
 </html>

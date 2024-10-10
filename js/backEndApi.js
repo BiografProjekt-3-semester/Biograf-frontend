@@ -46,6 +46,9 @@ fetch('http://localhost:8080/movie/getAllMovies')
 
 // Funktion til at vise filmens detaljer
 function showMovieDetails(movie) {
+    const heroSection = document.querySelector('.hero-section');
+    heroSection.style.display = 'none'; // Skjul hero-sektionen
+
     const detailsSection = document.getElementById("movie-details");
     const moviePoster = document.getElementById("moviePoster");
     const movieTitle = document.getElementById("movieTitle");
