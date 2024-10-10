@@ -9,6 +9,22 @@ function goToCustomerForm() {
     window.scrollTo(0, 0);
 }
 
+function handleFormSubmit(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Check if all the fields are valid
+    const form = document.getElementById('customerForm');
+    if (form.checkValidity()) {
+        // If the form is valid, call the reservation functions
+        createReservation();
+        fetchReservationAndCustomer();
+    } else {
+        // If the form is not valid, trigger the built-in HTML5 validation message
+        form.reportValidity();
+    }
+}
+
 // Event listener til at håndtere formularindsendelse
 document.getElementById("customerForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Forhindre sidegenindlæsning ved formularindsendelse

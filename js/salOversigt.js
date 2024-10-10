@@ -1,5 +1,9 @@
-// Funktion til at hente teater type baseret på showtime ID
-// Ny funktion til at kontrollere om showtimeId er til stede og vise/skjule elementer baseret på det
+window.addEventListener('beforeunload', function () {
+    // Ryd sessionStorage, når brugeren forlader siden eller genindlæser den
+    sessionStorage.removeItem('selectedSeats');
+    console.log("SessionStorage ryddet ved sideunload.");
+});
+
 let selectedSeats = [];
 
 async function getTheaterTypeFromShowtime(showtimeId) {

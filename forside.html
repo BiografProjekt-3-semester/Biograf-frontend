@@ -107,23 +107,24 @@
     </div>
 </section>
 <div id="formContainer">
-<form id="customerForm" style="display: none">
-    <h1>Indtast dine oplysninger for reservation</h1>
-    <label for="firstName">Fornavn:</label>
-    <input type="text" id="firstName" name="firstName" required><br><br>
+    <form id="customerForm" style="display: none" onsubmit="return handleFormSubmit(event)">
+        <h1>Indtast dine oplysninger for reservation</h1>
+        <label for="firstName">Fornavn:</label>
+        <input type="text" id="firstName" name="firstName" required><br><br>
 
-    <label for="lastName">Efternavn:</label>
-    <input type="text" id="lastName" name="lastName" required><br><br>
+        <label for="lastName">Efternavn:</label>
+        <input type="text" id="lastName" name="lastName" required><br><br>
 
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
 
-    <label for="age">Alder:</label>
-    <input type="number" id="age" name="age" required><br><br>
+        <label for="age">Alder:</label>
+        <input type="number" id="age" name="age" required><br><br>
 
-    <button onclick="createReservation(),fetchReservationAndCustomer()">Bekræft reservation</button>
-</form>
+        <button type="submit">Bekræft reservation</button>
+    </form>
 </div>
+
 
 
 
