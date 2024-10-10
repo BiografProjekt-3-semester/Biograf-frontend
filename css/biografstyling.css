@@ -22,6 +22,7 @@ body {
 }
 
 .header .logo {
+    cursor: pointer;
     font-size: 2em;
     color: #ff5733; /* Lys orange farve */
 }
