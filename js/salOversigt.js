@@ -105,7 +105,10 @@ function handleSeatSelection(seatElement) {
         if (selectedSeats.length < maxSeats) {
             seatElement.classList.remove('available', 'special');
             seatElement.classList.add('selected'); // Markér valgte sæder med orange
+
+            // Gem kun stolens ID i selectedSeats
             selectedSeats.push({
+                chairId: seatElement.dataset.chairId,
                 row: seatElement.dataset.row,
                 seat: seatElement.dataset.seat
             });
@@ -115,13 +118,14 @@ function handleSeatSelection(seatElement) {
     } else if (seatElement.classList.contains('selected')) {
         seatElement.classList.remove('selected');
         seatElement.classList.add(seatElement.dataset.special === 'true' ? 'special' : 'available');
-        selectedSeats = selectedSeats.filter(id => id.row !== seatElement.dataset.row || id.seat !== seatElement.dataset.seat);
+        selectedSeats = selectedSeats.filter(item => item.chairId !== seatElement.dataset.chairId);
     }
     sessionStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
     console.log("Valgte sæder gemt i sessionStorage: ", sessionStorage.getItem('selectedSeats'));
 
     updateSelectedSeatsDisplay();
 }
+
 
 function updateSelectedSeatsDisplay() {
     const selectedSeatsDisplay = document.getElementById('selected-seats');
@@ -130,7 +134,7 @@ function updateSelectedSeatsDisplay() {
         return;
     }
 
-    // Opret en map hvor vi grupperer sæderne efter række
+    // Opret en map, hvor vi grupperer sæderne efter række og viser dem korrekt
     const seatsByRow = selectedSeats.reduce((acc, seat) => {
         const row = seat.row;
         if (!acc[row]) {
@@ -153,6 +157,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedSeats) {
         selectedSeats = JSON.parse(savedSeats);
         console.log("Hentede valgte sæder fra sessionStorage: ", selectedSeats);
+        updateSelectedSeatsDisplay();
+    } else {
+        sessionStorage.removeItem('selectedSeats');
     }
-
 });
