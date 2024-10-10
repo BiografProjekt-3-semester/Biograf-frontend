@@ -119,6 +119,8 @@ function handleSeatSelection(seatElement) {
     }
     sessionStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
     console.log("Valgte sæder gemt i sessionStorage: ", sessionStorage.getItem('selectedSeats'));
+
+    updateSelectedSeatsDisplay();
 }
 
 function updateSelectedSeatsDisplay() {
