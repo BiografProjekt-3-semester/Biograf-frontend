@@ -118,7 +118,7 @@ function filterShowtimesByDate() {
     movieShowtimes.innerHTML = '';
 
     // Fetch showtimes for the selected date and movie
-    fetch(`http://localhost:8080/api/showTimes/movie/${movieId}?date=${selectedDate}`)
+    fetch(`http://localhost:8080/api/showTimes/movies/${movieId}?date=${selectedDate}`)
         .then(response => response.json())
         .then(showtimes => {
             if (showtimes.length > 0) {
